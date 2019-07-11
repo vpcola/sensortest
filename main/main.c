@@ -268,12 +268,15 @@ static void main_task(void * arg)
         switch(pmsg->event)
         {
             case EV_GPS_UPDATE:
+                ESP_LOGI(TAG, "GPS Data received!!\r\n");
                 has_gps_data = 1;
                 break;
             case EV_DUST_DATA_UPDATE:
+                ESP_LOGI(TAG, "Dust sensor data recieved!\r\n");
                 has_dust_data = 1;
                 break;
             case EV_WATER_LEVEL_UPDATE:
+                ESP_LOGI(TAG, "Water level sensor data received!\r\n");
                 has_water_level_data = 1;
                 break;
             default:
@@ -283,7 +286,7 @@ static void main_task(void * arg)
         /* TODO: Determine if we need to shutdown! */
         if ( has_gps_data && has_dust_data && has_water_level_data )
         {
-            ESP_LOGI(TAG, "All data received! ... shutting down!\r\n");
+            ESP_LOGI(TAG, "All data received! ... shutting down main task!!\r\n");
             break;
         }else
             continue;
