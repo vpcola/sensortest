@@ -1,0 +1,80 @@
+menu "Example Configuration"
+menu "GPS UART"
+
+choice GPS_UART_PORT
+    prompt "UART Port for GPS"  
+    default GPS_UART_PORT_2
+    help
+        UART1 and UART2 are available, UART0 is used for debugging.
+
+    config GPS_UART_PORT_2
+        bool "UART2"
+    config GPS_UART_PORT_1
+        bool "UART1"
+
+endchoice
+
+config GPS_UART_RX_PIN
+    int "UART_PIN"
+    default 16 
+    range 0 34
+    help
+        The RX GPIO pin to use.
+endmenu
+
+menu "Plantower PMS5003"
+
+choice DUSTSENSOR_UART_PORT
+    prompt "UART Port for Plantower PMS5003"
+    default DUSTSENSOR_PORT_UART_1
+    help
+        UART1 and UART2 are available, UART0 is used for debugging.
+
+
+    config DUSTSENSOR_UART_PORT_1
+        bool "UART1"
+
+    config DUSTSENSOR_UART_PORT_2
+        bool "UART2"
+endchoice
+
+config DUSTSENSOR_UART_RX_PIN 
+    int "UART GPIO number"
+    range 0 34
+    default 4 
+    help
+        GPIO number for the UART RX pin.
+
+endmenu
+
+menu "Flood Level Sensor"
+
+config ULTRASONIC_SENSOR_TRIGGER_PIN
+    int "Trigger Pin (GPIO)"
+    default 15
+    range 0 34
+    help 
+        The GPIO connected to the trigger pin of the ultrasonic sensor
+
+config ULTRASONIC_SENSOR_ECHO_PIN
+    int "Echo Pin (GPIO)"
+    default 4
+    range 0 34
+    help
+        The GPIO connected to the echo pin of the ultrasonic sensor
+
+config ULTRASONIC_SENSOR_READ_INTERVAL
+    int "Read interval in milliseconds"
+    default 1000
+    help 
+        The read interval of the ultrasonic sensor (polling interval)
+
+endmenu
+
+config DEEP_SLEEP_INTERVAL
+    int "Deep sleep interval in milliseconds"
+    default 1000
+    help
+        The deep sleep interval, the number of milliseconds to sleep before waking up again.
+
+endmenu

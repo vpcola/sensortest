@@ -1,0 +1,9 @@
+[submodule "components/nmeaparser"]
+	path = components/nmeaparser
+	url = https://github.com/vpcola/nmeaparser.git
+[submodule "components/ultrasonic"]
+	path = components/ultrasonic
+	url = https://github.com/vpcola/ultrasonic.git
+[submodule "components/plantower5003"]
+	path = components/plantower5003
+	url = https://github.com/vpcola/plantower5003.git
