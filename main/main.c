@@ -147,6 +147,7 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
 {
    gps_t *gps = NULL;
    static main_task_message_t msg;
+   main_task_message_t *pmsg;
    switch (event_id) {
    case GPS_UPDATE:
        gps = (gps_t *)event_data;
@@ -173,7 +174,8 @@ static void gps_event_handler(void *event_handler_arg, esp_event_base_t event_ba
         msg.data.gps_data.altitude = gps->altitude;
         msg.data.gps_data.speed = gps->speed;
 
-        xQueueSend(main_task_queue, (void *) &msg, (TickType_t) 0);
+        pmsg = &msg;
+        xQueueSend(main_task_queue, (void *) &pmsg, (TickType_t) 0);
 
        break;
    case GPS_UNKNOWN:
@@ -189,6 +191,7 @@ static void dustsensor_event_handler(void *event_handler_arg, esp_event_base_t e
 {
     dustsensor_t *sensor = NULL;
     static main_task_message_t msg;
+    main_task_message_t * pmsg;
 
     switch (event_id) {
     case SENSOR_UPDATE:
@@ -213,7 +216,8 @@ static void dustsensor_event_handler(void *event_handler_arg, esp_event_base_t e
         msg.data.dust_data.pm25_atmospheric = sensor->pm25_atmospheric;
         msg.data.dust_data.pm10_atmospheric = sensor->pm10_atmospheric;
 
-        xQueueSend(main_task_queue, (void *) &msg, (TickType_t) 0);
+        pmsg = &msg;
+        xQueueSend(main_task_queue, (void *) &pmsg, (TickType_t) 0);
         
         break;
     case SENSOR_UNKNOWN:
@@ -229,6 +233,7 @@ static void floodsensor_event_handler(void *event_handler_arg, esp_event_base_t 
 {
     ultrasonicsensor_t *sensor = NULL;
     static main_task_message_t msg;
+    main_task_message_t * pmsg;
 
     switch (event_id) {
     case ULTRASONICSENSOR_UPDATE:
@@ -239,7 +244,8 @@ static void floodsensor_event_handler(void *event_handler_arg, esp_event_base_t 
         msg.event = EV_WATER_LEVEL_UPDATE;
         msg.data.water_level_data.distance_cm = sensor->distance_cm;
         
-        xQueueSend(main_task_queue, (void *) &msg, (TickType_t) 0);
+        pmsg = &msg;
+        xQueueSend(main_task_queue, (void *) &pmsg, (TickType_t) 0);
 
         break;
     case ULTRASONICSENSOR_UNKNOWN:
